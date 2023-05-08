@@ -700,15 +700,15 @@ static int optoe_make_nvmem(struct optoe_data *optoe)
 	nvmem_config.stride = 1;
 	nvmem_config.word_size = 1;
 	nvmem_config.size = optoe->byte_len;
-#ifdef LATEST_KERNEL
-	if (optoe->nvmem)
-		devm_nvmem_unregister(dev, optoe->nvmem);
-	optoe->nvmem = devm_nvmem_register(dev, &nvmem_config);
-#else
+// #ifdef LATEST_KERNEL
+// 	if (optoe->nvmem)
+// 		devm_nvmem_unregister(dev, optoe->nvmem);
+// 	optoe->nvmem = devm_nvmem_register(dev, &nvmem_config);
+// #else
 	if (optoe->nvmem)
 		nvmem_unregister(optoe->nvmem);
 	optoe->nvmem = nvmem_register(&nvmem_config);
-#endif
+// #endif
 	dev_info(dev, "%u byte class %d EEPROM\n",
 		optoe->byte_len, optoe->dev_class);
 	return 0;
